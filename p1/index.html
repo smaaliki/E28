@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang ='en'>
+<head>
+    <title>E28 Project1: Game</title>
+    <header>
+        <link rel="stylesheet" href="index.css">
+        <!-- development version of Vue -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
+
+        <script src='script.js' defer></script>
+    </header>
+</head>
+<body>
+    <h1>Rock, Paper, Scissors!</h1>
+    <div id='app' v-cloak>
+        <div v-if='!startGame'>
+            <label>Enter your name: 
+                <input type='text' v-model='playerName'>
+            </label>      
+            <button v-on:click='startGame = true'>Start</button> 
+            <!--Todo: handle empty field--> 
+        </div>
+
+        <div v-if='startGame'>
+            <p>Ok, {{ playerName }} - Select one of the options below:
+                <br>To be continued...
+            </p>
+
+        </div>
+    </div>
+</body>
+</html>
