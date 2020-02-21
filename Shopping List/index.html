@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang ='en'>
+<head>
+    <title>E28: Shopping List</title>
+    <header>
+        <link rel="stylesheet" href="index.css">
+        <!-- development version of Vue -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
+
+        <script src='script.js' defer></script>
+    </header>
+</head>
+<body>
+    <h1>Shopping List</h1>
+    <div id='app' v-cloak>
+        <div>
+            <label>Qty: 
+                <input type='number' v-model.number='quantity'>
+            </label>      
+            <label>Items:
+                <input type='text' v-model='item'>
+            </label>      
+            <button v-on:click='addItem'>Add</button>
+            <!--Todo: handle empty field--> 
+        </div>
+
+        <div v-if='firstLoad'>
+            <p id='message'>You have no items on your list.</p>
+        </div>
+        <div v-else>
+            <p id='message'>Total item count: {{ totalQuantity }}</p>
+            <ul>
+                <li v-for="myItem in items">
+                    {{ myItem[0]}} x {{myItem[1]}}
+                    
+                </li>
+            </ul>
+            <p> <button v-on:click='reset'>Reset</button></p>
+        </div>
+    </div>
+</body>
+</html>
