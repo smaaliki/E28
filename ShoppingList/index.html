@@ -11,14 +11,14 @@
     </header>
 </head>
 <body>
+    <h1>Shopping List</h1>
     <div id='app' v-cloak>
-        <h1>Shopping List</h1>
         <div>
             <label>Qty: 
                 <input type='number' v-model.number='quantity'>
             </label>      
             <label>Items:
-                <input type='text' v-model='item'>
+                <input type='text' v-model='item' v-on:keyup.enter='addItem'>
             </label>      
             <button v-on:click='addItem'>Add</button>
             <!--Todo: handle empty field--> 
