@@ -22,10 +22,16 @@
         </div>
 
         <div v-if='startGame'>
-            <p>Ok, {{ playerName }} - Select one of the options below:
-                <br>To be continued...
-            </p>
-
+            <p>Ok, {{ playerName }} - Select one of the options below and click on [Let's Go]:</p>
+            <p>
+                <input type='radio' id='selection' value='Rock' name="selection" v-model='picked'>
+                <label for='rock'>Rock</label><br>
+                <input type='radio' id='selection' value='Paper' name="selection" v-model='picked'>
+                <label for='paper'>Paper</label><br>
+                <input type='radio' id='selection' value='Scissors' name="selection" v-model='picked'>
+                <label for='scissors'>Scissors</label>
+            </p>        
+            <p> {{ playerName }} picked: {{ picked }}, computer picked: TBD    </p>
         </div>
     </div>
 </body>
