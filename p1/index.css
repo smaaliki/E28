@@ -2,12 +2,19 @@
     display: none
 }
 
+body{
+    background-color:beige;
+    text-align: center;
+}
 h1 {
     font-size: 1.4em;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color:darkblue;
+    color:rgb(255, 145, 0);
 }
 
+label {
+    color:rgb(255, 145, 0);
+}
 #winner {
     font-weight: bolder;
 }

@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="index.css">
         <!-- development version of Vue -->
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
-
+        <!--<script src="vue.js"> </script>-->
         <script src='script.js' defer></script>
     </header>
 </head>
@@ -24,14 +24,23 @@
         <div v-if='startGame'>
             <p>Ok, {{ playerName }} - Select one of the options below and click on [Let's Go]:</p>
             <p>
-                <input type='radio' id='selection' value='Rock' name="selection" v-model='picked'>
+                <input type='radio' id='selection' value='Rock' name="selection" v-model='playerSelection'>
                 <label for='rock'>Rock</label><br>
-                <input type='radio' id='selection' value='Paper' name="selection" v-model='picked'>
+                <input type='radio' id='selection' value='Paper' name="selection" v-model='playerSelection'>
                 <label for='paper'>Paper</label><br>
-                <input type='radio' id='selection' value='Scissors' name="selection" v-model='picked'>
+                <input type='radio' id='selection' value='Scissors' name="selection" v-model='playerSelection'>
                 <label for='scissors'>Scissors</label>
-            </p>        
-            <p> {{ playerName }} picked: {{ picked }}, computer picked: TBD    </p>
+            </p>
+            
+            <!--https://www.w3schools.com/tags/tag_button.asp-->
+            <button v-on:click="letsGo">Let's Go!</button>
+        
+            <div v-if='playerSelection && compScore'>
+                <!--Todo: handle player seleciton being updated before button press-->
+                <p>{{ playerName }} selected: {{ playerSelection }}; computer selected: {{ compSelection}}</p>
+                <p>{{ winnerTxt }}</p>
+                <p>{{ playerName }}'s Score: {{ playerScore }} / Computer Score: {{ compScore }}</p>
+            </div>
         </div>
     </div>
 </body>
