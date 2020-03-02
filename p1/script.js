@@ -9,6 +9,8 @@ let app = new Vue({
         compScore: 0,
         playerScore:0,
         winnerTxt: '',
+        imageSrc: '',
+        imageAlt: '',
     },
 
     methods:{
@@ -21,31 +23,45 @@ let app = new Vue({
 
             if(this.playerSelection==this.compSelection){
                 this.winnerTxt = 'It is a tie!!'
+                this.imageSrc= 'angry';
+                this.imageAlt = 'Angry Face';
             } else if(this.playerSelection == 'Rock') {
                 if(this.compSelection == 'Paper'){
                     this.winnerTxt = 'Computer Wins :(';
+                    this.imageSrc= 'sad';
+                    this.imageAlt = 'Sad Face';
                     this.compScore++;
                 }
                 else {
                     this.winnerTxt = 'You Win :)';
+                    this.imageSrc= 'happy';
+                    this.imageAlt = 'Happy Face';
                     this.playerScore++;
                 }
             } else if(this.playerSelection == 'Paper') {
                 if(this.compSelection == 'Scissors'){
                     this.winnerTxt = 'Computer Wins :(';
+                    this.imageSrc= 'sad';
+                    this.imageAlt = 'Sad Face';
                     this.compScore++;
                 }
                 else {
                     this.winnerTxt = 'You Win :)';
+                    this.imageSrc= 'happy';
+                    this.imageAlt = 'Happy Face';
                     this.playerScore++;
                 }
             } else if(this.playerSelection == 'Scissors') {
                 if(this.compSelection == 'Rock') {
                     this.winnerTxt = 'Computer Wins :(';
+                    this.imageSrc= 'sad';
+                    this.imageAlt = 'Sad Face';
                     this.compScore++;
                 }
                 else {
                     this.winnerTxt = 'You Win :)';
+                    this.imageSrc= 'happy';
+                    this.imageAlt = 'Happy Face';
                     this.playerScore++;
                 }
             }
