@@ -1,0 +1,31 @@
+[v-cloak] {
+    display: none
+}
+
+#sWord {
+    font-size: 1.4em;
+}
+
+.hint {
+    background-color: green;
+    color:white;
+}
+
+.errorClass {
+    background-color: red;
+    color:white;
+}
+
+body{
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    font-size: 1.4em;
+    color:rgb(125, 30, 75);
+}
+
+label {
+    color:rgb(25, 20, 20);
+}

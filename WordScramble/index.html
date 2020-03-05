@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang ='en'>
+<head>
+    <title>E28: Word Scramble</title>
+    <header>
+        <link rel="stylesheet" href="index.css">
+        <!-- development version of Vue -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
+        <!--<script src="vue.js"> </script>-->
+        <script src='script.js' defer></script>
+    </header>
+</head>
+<body>
+    <h1>Word Scramble</h1>
+    <div id='app' v-cloak>
+        <div v-if='!startGame'>
+            <label>Enter your player name: 
+                <input type='text' v-model='playerName'>
+            </label>      
+            <button v-on:click='setup'>Let's play!</button> 
+            <!--Todo: handle empty field--> 
+        </div>
+
+        <div v-if='startGame'>
+            <p>Game on, {{ playerName }}!</p>
+            <p>Your mystery word is: <span id='sWord'>{{ scrambledWord }}</span></p>
+            <p>Hint: {{ hint }}</p>
+            <div>
+                <label>Your guess: <input type='text' v-model.trim='playerGuess'> </label>
+                <button v-on:click="submitGuess">Submit guess</button>
+            </div>
+        </div>
+        
+        <div v-if='feedbackMessage' class='hint' v-bind:class='{errorClass : !correctAnswer}'>
+            {{ feedbackMessage }}
+            <button v-if='correctAnswer' v-on:click="setup">Play again</button>
+        </div>
+    </div>
+</body>
+</html>
