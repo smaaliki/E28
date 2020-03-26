@@ -24,7 +24,7 @@ let app = new Vue({
     el: '#app',
     data:{
         startGame: false,
-        playerName: 'Samer',
+        playerName: '',
         playerSelection: '',
         compSelection: '',
         compScore: 0,
