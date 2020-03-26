@@ -15,6 +15,34 @@ h1 {
 label {
     color:rgb(255, 145, 0);
 }
+
+.selections{
+    width:10%;
+    text-align:left;
+    margin-left: 45%;
+}
+
+.player_wins {
+    background-color: green;
+    color:white;
+}
+
+.player_ties {
+    background-color: orange;
+    color:black;
+}
+
+.player_loses {
+    background-color: red;
+    color:white;
+}
+
+.roundResults{
+    width:20%;
+    text-align:left;
+    margin-left: 40%;
+}
+
 #winner {
     font-weight: bolder;
 }

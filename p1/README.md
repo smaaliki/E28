@@ -6,4 +6,4 @@
 **Icons:** https://www.flaticon.com/authors/vectors-market
 
 ## Notes for instructor
-*any notes for me to refer to while grading; if none, omit this section*
+*Some code optimization is definitely warranted*

@@ -6,7 +6,6 @@
         <link rel="stylesheet" href="index.css">
         <!-- development version of Vue -->
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
-        <!--<script src="vue.js"> </script>-->
         <script src='script.js' defer></script>
     </header>
 </head>
@@ -23,7 +22,7 @@
 
         <div v-if='startGame'>
             <p>Ok, {{ playerName }} - Select one of the options below and click on [Let's Go]:</p>
-            <p>
+            <p class = 'selections'>
                 <input type='radio' id='selection' value='Rock' name="selection" v-model='playerSelection'>
                 <label for='rock'>Rock</label><br>
                 <input type='radio' id='selection' value='Paper' name="selection" v-model='playerSelection'>
@@ -35,12 +34,24 @@
             <!--https://www.w3schools.com/tags/tag_button.asp-->
             <button v-on:click="letsGo">Let's Go!</button>
         
-            <div v-if='playerSelection && compScore'>
-                <!--Todo: handle player seleciton being updated before button press-->
+            <!--Only show the results once the player and the computer made a selection-->
+            <div v-if='playerSelection && compSelection'>
+                <!--Todo: handle player selection being updated before button press-->
                 <p>{{ playerName }} selected: {{ playerSelection }}; computer selected: {{ compSelection}}</p>
-                <p>{{ winnerTxt }}</p>
+                <div v-if='winnerTxt'  v-bind:class="[playerWins ? 'player_wins' : computerWins? 'player_loses' : 'player_ties']" > <!--v-bind:class='{player_loses: computerWins, player_wins: playerWins}'>-->
+                    {{ winnerTxt }}
+                </div>
+                
                 <img v-bind:src='"images/" + imageSrc + ".png"' v-bind:alt='imageAlt'>
                 <p>{{ playerName }}'s Score: {{ playerScore }} / Computer Score: {{ compScore }}</p>
+                <p> <button v-on:click='reset'>Reset</button></p>
+                <div>
+                    <round-detail 
+                        v-for='round in rounds' 
+                        v-bind:number='round.number' 
+                        v-bind:winner='round.winner'>
+                    </round-detail>
+                </div>
             </div>
         </div>
     </div>
