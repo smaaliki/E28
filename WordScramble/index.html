@@ -4,10 +4,8 @@
     <title>E28: Word Scramble</title>
     <header>
         <link rel="stylesheet" href="index.css">
-        <!-- development version of Vue -->
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
-        <!--<script src="vue.js"> </script>-->
-        <script src='script.js' defer></script>
+        
+        <script src='js/master.js' defer></script>
     </header>
 </head>
 <body>
@@ -29,11 +27,13 @@
                 <label>Your guess: <input type='text' v-model.trim='playerGuess'> </label>
                 <button v-on:click="submitGuess">Submit guess</button>
             </div>
-        </div>
-        
-        <div v-if='feedbackMessage' class='hint' v-bind:class='{errorClass : !correctAnswer}'>
-            {{ feedbackMessage }}
-            <button v-if='correctAnswer' v-on:click="setup">Play again</button>
+            
+                <feedback-msg 
+                    v-on:reset='setup()'
+                    v-bind:answer='correctAnswer' 
+                    v-bind:msg='feedbackMessage'>
+                </feedback-msg>
+              
         </div>
     </div>
 </body>

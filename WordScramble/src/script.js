@@ -1,9 +1,12 @@
+import Vue from 'vue';
+import FeedbackMessage from './components/FeedbackMessage.vue'
+
 //The Vue instance
 let app = new Vue({
     el: '#app',
     data:{
         startGame: false,
-        playerName: '',
+        playerName: 'Samer',
         words: [
             ['apple', 'Sometimes red, sometimes delicious'],
             ['washington', 'Rushmore\'s left edge'],
@@ -22,9 +25,12 @@ let app = new Vue({
         feedbackMessage: '',
         correctAnswer: false,
     },
+    components: {
+        'feedback-msg' : FeedbackMessage
+    },
     computed: {
         scrambledWord: function() {
-           //Let's put the leters of the word into an array
+           //Let's put the letters of the word into an array
            let myWordArray = [];
            for (var i=0; i<this.mysteryWord.length; i++) {
                myWordArray.push(this.mysteryWord[i]);

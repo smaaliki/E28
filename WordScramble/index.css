@@ -6,15 +6,6 @@
     font-size: 1.4em;
 }
 
-.hint {
-    background-color: green;
-    color:white;
-}
-
-.errorClass {
-    background-color: red;
-    color:white;
-}
 
 body{
     text-align: center;
