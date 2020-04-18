@@ -35,8 +35,8 @@ export default class Api {
     /**
      * Get a document from a collection by its id
      */
-    get(collection, id) {
-        return this.find(collection, 'id', id);
+    get(collection, slug) {
+        return this.find(collection, 'slug', slug);
     }
 
     /**

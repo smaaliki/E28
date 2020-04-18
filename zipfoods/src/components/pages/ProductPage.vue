@@ -15,6 +15,7 @@
 
 <script>
 //const axios = require('axios');
+import * as app from '@/common/app.js';
 
 export default {
     name: '',
@@ -25,9 +26,12 @@ export default {
             product: null
         };
     },
-    mounted: function() {
-        
+        mounted: function () {
+         app.api.get('products', this.slug).then(response => {
+            this.product = response;
+        });
     }
+
 };
 </script>
 
