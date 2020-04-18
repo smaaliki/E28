@@ -1,6 +1,6 @@
 export const products = [
     {
-        id: 1,
+        slug: 'driscolls-strawberries',
         name: 'Driscoll’s Strawberries',
         description:
             'Driscoll’s Strawberries are consistently the best, sweetest, juiciest strawberries available. This size is the best selling, as it is both convenient for completing a cherished family recipes and for preparing a quick snack straight from the fridge.',
@@ -11,7 +11,7 @@ export const products = [
         categories: ['produce', 'fruits']
     },
     {
-        id: 2,
+        slug: 'nestle-toll-house-cookie-dough',
         name: 'Nestle Toll House Cookie Dough',
         description:
             'Get the classic taste that America loves in a ready to bake dough. Full of our famous morsels, these cookies deliver the chocolate flavor you’ve come to expect from Nestle Toll House.',
@@ -22,7 +22,7 @@ export const products = [
         categories: ['snacks', 'baking']
     },
     {
-        id: 3,
+        slug: 'gotham-greens-lettuce-medley',
         name: 'Gotham Greens Gourmet Lettuce Medley',
         description:
             "This lovely blend features Gotham Greens’ Tropicana green leaf, Red Sail red leaf, Oak leaf, Lollo Rossa and tender Butterhead lettuces. Perfect for a colorful salad that's (almost) grown right in your own backyard!",
@@ -33,7 +33,7 @@ export const products = [
         categories: ['produce', 'vegetables']
     },
     {
-        id: 4,
+        slug: 'gold-medal-flour',
         name: 'Gold Medal All Purpose Flour',
         description:
             'All-purpose bleached flour is great for just about everything but doesn’t add any color. It’s perfect for baked goods like white sandwich bread and cake.',
@@ -44,7 +44,7 @@ export const products = [
         categories: ['baking']
     },
     {
-        id: 5,
+        slug: 'honey-nut-cheerios',
         name: 'Honey Nut Cheerios',
         description:
             'You already know that Honey Nut Cheerios Naturally Flavored has the irresistible taste of golden honey, making it a family favorite. Something that everyone can smile about! ',
@@ -55,7 +55,7 @@ export const products = [
         categories: ['breakfast']
     },
     {
-        id: 6,
+        slug: 'eggo-nutri-grain-whole-wheat-waffles',
         name: 'Eggo Nutri-Grain Whole Wheat Waffles',
         description:
             'Eggo® Nutri-Grain® waffles made with whole wheat have the same light and crispy texture as our original Eggo® Waffles, only with the added bonus of nutritious whole grain! ',
@@ -66,7 +66,7 @@ export const products = [
         categories: ['breakfast', 'frozen']
     },
     {
-        id: 7,
+        slug: 'amys-cheese-pizza',
         name: 'Amy’s Cheese Pizza',
         description:
             'The classic favorite, made with our savory pizza sauce and grated part-skim mozzarella cheese.',
@@ -77,7 +77,7 @@ export const products = [
         categories: ['frozen', 'snacks']
     },
     {
-        id: 8,
+        slug: 'birds-eye-vegetable-mix',
         name: 'Birds Eye Steamfresh Fresh Frozen Vegetable Mix',
         description:
             'Delicious Birds Eye vegetables in blends that are just right for side dishes and your recipes.',
@@ -88,7 +88,7 @@ export const products = [
         categories: ['frozen', 'vegetables']
     },
     {
-        id: 9,
+        slug: 'bare-coconut-chips',
         name: 'Bare Coconut Chips',
         description:
             'Simply made with coconuts, cane sugar, and sea salt.',
@@ -99,7 +99,7 @@ export const products = [
         categories: ['snacks']
     },
     {
-        id: 10,
+        slug: 'snapple-peach-tea',
         name: 'Snapple Peach Tea',
         description:
             'To Peach their own. Smooth Snapple tea, perfect peach flavor. We made it just for you from the Best Stuff on Earth.',

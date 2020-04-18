@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { products } from '@/products.js';
+import { products } from '@/seeds/products.js';
 
 export default {
     name:'',

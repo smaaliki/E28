@@ -1,10 +1,8 @@
 <template>
-    <router-link :to='{name: "product", params: {id: product.id}}'>
-    <div class='product'>
+    <router-link class='product' :to='{name: "product", params: {slug: product.slug}}'>
         <div class='product-name'>{{ product.name }}</div>
-        <img class='product-thumb' :src='"@/assets/images/products/" + product.id + ".jpg"' />
+        <img class='product-thumb' :src='imageSrc' />
         <div class='product-price'>${{ product.price }}</div>
-    </div>
     </router-link>
 </template>
 
@@ -15,7 +13,17 @@ export default {
     data: function() {
         return{};
     },
-
+    computed: {
+        imageSrc: function() {
+            try {
+                return require('@/assets/images/products/' +
+                    this.product.slug +
+                    '.jpg');
+            } catch (e) {
+                return require('@/assets/images/products/image-not-available.jpg');
+            }
+        }
+    }
 };
 </script>
 
