@@ -19,7 +19,7 @@ export default {
   name: 'App',
   data: function() {
         return {
-            links: ['home', 'dashboard', 'sprs']
+            links: ['home', 'sprs', 'dashboard' ]
         };
   },
   components: {
