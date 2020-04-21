@@ -22,14 +22,24 @@
             <li>Resolution</li>
         </ul>
         </div>
-        <h2>The Plan</h2>
-        <p>The plan to complete this project is as follows:
+        <h2>The Original Plan</h2>
+        <p>The plan to complete this project was:
             <ol>
-            <li>Creat a table with fixed local data (json file) that will display the SPRs</li>
+            <li>Create a table with fixed local data (json file) that will display the SPRs</li>
             <li>Add a functionality (button that will trigger a Modal) to add an SPR to a the local data</li>
             <li>Add functionality (Actions column) to Edit or Delete and SPR</li>
             <li>Create a dashboard on the landing page that will summarize the SPRs (maybe a chart?)</li>
             <li>Create a database and link it to the system for saving the SPRs</li>
+            </ol>
+        </p>
+        <h2>The New Plan</h2>
+        <p>The plan to complete this project is now as follows:
+            <ol>
+            <li>Done - Create a table with fixed local data (json file) that will display the SPRs</li>
+            <li>Create a database and link it to the system for saving the SPRs</li>
+            <li>Add a functionality (button that will trigger a Modal) to add an SPR to the server</li>
+            <li>Add functionality (Actions column) to Edit or Delete an SPR</li>
+            <li>Create a dashboard page that will summarize the SPRs (maybe a chart?)</li>
             </ol>
         </p>
     </div>

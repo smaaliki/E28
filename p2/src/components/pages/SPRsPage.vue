@@ -18,7 +18,7 @@
   </thead>
   <tbody>
       <tr v-for='spr in sprs' :key='spr.slug'>
-      <td>{{ spr.id }}</td>
+      <td>SPR_{{ spr.spr_id }}</td>
       <td>{{ spr.title }}</td>
       <td>{{ spr.description }}</td>
       <td>{{ spr.priority }}</td>
@@ -30,7 +30,7 @@
     </div>
 </template>
 <script>
-import { sprs } from '@/seeds/sprs.js';
+import * as app from '@/common/app.js';
 
 export default {
     name:'',
@@ -38,9 +38,14 @@ export default {
     },
     data: function() {
         return{
-            sprs: sprs,
+            sprs: [],
             columns: ['id', 'title', 'description', 'priority', 'status', 'actions']
         };
+    },
+    mounted: function () {
+         app.api.all('sprs').then(response => {
+            this.sprs = response;
+        });
     },
     methods: {
     'sortTable': function sortTable(col) {
@@ -52,10 +57,9 @@ export default {
         }
         return 0;
       })
-    }
+    },
   }  
 }
-
 
 </script>
 <style scoped>

@@ -1,28 +1,21 @@
-# p2
+*Any instructions/notes in italics should be removed from the template before submitting*
 
-## Project setup
-```
-npm install
-```
+# Project 2
++ By: *Samer Maaliki*
++ Production URL: <http://e28p2.ulaila.com>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Pages summary
+*List the "pages" of your application*
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## SFC summary
+*List the SFCs of your application*
+  
+## Server interaction
+*List the features in your application that are persisting and retrieving data from the server*
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
+## Outside resources
 For the SPRs Table and sorting, I followed the example in the following page:
 https://www.developerdrive.com/creating-a-data-table-in-vue-js/
 
+## Notes for instructor
+*Any notes for me to refer to while grading; if none, omit this section*
