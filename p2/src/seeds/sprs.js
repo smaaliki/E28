@@ -1,5 +1,6 @@
 export const sprs = [
     {
+        id: 1,
         slug: 'unauthorized-admin-page-login',
         title: 'Unauthorized Admin Page Login',
         description:
@@ -11,6 +12,7 @@ export const sprs = [
         resolution: ''
     },
     {
+        id: 2,
         slug: 'missign-cjm-process',
         title: 'Missing Customer Journey Map Task',
         description:
@@ -22,6 +24,7 @@ export const sprs = [
         resolution: ''
     },
     {
+        id: 3,
         slug: 'include-service-id-in-export',
         title: 'Include Service ID in Export',
         description:
