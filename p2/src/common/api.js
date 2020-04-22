@@ -43,7 +43,6 @@ export default class Api {
      * Get all the documents from a collection
      */
     async all(collection) {
-        console.log("Getting all");
         let results = {};
         const querySnapshot = await this.api
             .collection(collection)
@@ -66,6 +65,22 @@ export default class Api {
         }
         catch (error) {
             return 'Error adding document: ' + error;
+        }
+    }
+
+    /**
+     * Update a document to a collection
+     */
+    async save(collection, document) {
+        try {
+            const docRef = await this.api
+                .collection(collection)
+                .doc(document)
+                .update(document);
+            return docRef.id;
+        }
+        catch (error) {
+            return 'Error saving document: ' + error;
         }
     }
 

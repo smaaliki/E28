@@ -5,6 +5,8 @@ import HomePage from '../src/components/pages/HomePage.vue';
 import SPRsPage from '../src/components/pages/SPRsPage.vue';
 import DashboardPage from '../src/components/pages/DashboardPage.vue';
 import AdminPage from '../src/components/pages/AdminPage.vue';
+import SPRPage from '@/components/pages/SPRPage.vue';
+import CreateSPRPage from '@/components/pages/CreateSPRPage.vue';
 
 Vue.use(VueRouter);
 const routes = [
@@ -12,6 +14,8 @@ const routes = [
   { path: '/sprs', component: SPRsPage, name: 'sprs' },
   { path: '/dashboard', component: DashboardPage, name: 'dashboard' },
   { path: '/admin', component: AdminPage, name: 'admin' },
+  { path: '/spr/:slug', component: SPRPage, name: 'spr', props: true },
+  { path: '/sprs/create', component: CreateSPRPage, name: 'add an spr' },
 ]
 
 Vue.config.productionTip = false

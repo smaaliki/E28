@@ -35,7 +35,6 @@ export default {
                 app.api.all(collectionName).then(collection => {
                     Object.keys(collection).forEach(key => {
                         app.api.delete(collectionName, key);
-                        console.log("deleting database");
                     });
                 });
             }
@@ -48,9 +47,7 @@ export default {
                         collectionName,
                         this.collections[collectionName][key]
                     );
-                            console.log("seeding database");
-
-}
+                }
             }
             this.message = 'Seeding API';
         }
