@@ -23,31 +23,34 @@ export default {
     },
     data: function() {
         return{
-            //high: 0,
-            //medium: 0,
-            //low: 0,
-            priority: [],
-            type: [],
+            priority: [0,0,0],
+            type: [0,0,0],
         };
     },
     mounted: function () {
+        
+        /* Reset the priority and update */
+        this.priority = [];
         app.api.count('sprs','priority', 'High').then(response => {
-            this.priority[0] = response;
+            this.priority.push(response);
         });
         app.api.count('sprs','priority', 'Medium').then(response => {
-            this.priority[1] = response;
+            this.priority.push(response);
         });
         app.api.count('sprs','priority', 'Low').then(response => {
-            this.priority[2] = response;
+            this.priority.push(response);
         });
+
+        /* Reset the types and update */
+        this.type = [];
         app.api.count('sprs','type', 'New Feature').then(response => {
-            this.type[0] = response;
+            this.type.push(response);
         });
         app.api.count('sprs','type', 'Enhancement').then(response => {
-            this.type[1] = response;
+            this.type.push(response);
         });
         app.api.count('sprs','type', 'Issue').then(response => {
-            this.type[2] = response;
+            this.type.push(response);
         });
     }        
 }
