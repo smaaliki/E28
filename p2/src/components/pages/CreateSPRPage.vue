@@ -12,16 +12,25 @@
 
         <label for='reportedBy'>Reported By:</label>
         <input type='text' v-model='spr.reportedBy' id='reportedBy' />
+        
+        <!-- Ref: https://codepen.io/yanxyz/pen/pyOQMy -->
+        <label for='priority'>Priority:</label>
+        <input type='radio' v-model='spr.priority' value='High'>High
+        <input type='radio' v-model='spr.priority' value='Medium'>Medium
+        <input type='radio' v-model='spr.priority' value='Low'>Low
+        <br />
 
         <label for='priority'>Priority:</label>
-        <input type='text' v-model='spr.priority' id='priority' />
-
-        <label for='type'>Type:</label>
-        <input type='text' v-model='spr.type' id='type' />
+        <input type='radio' v-model='spr.type' value='New Feature'>New Feature
+        <input type='radio' v-model='spr.type' value='Enhancement'>Enahncement
+        <input type='radio' v-model='spr.type' value='Issue'>Issue
+        <br />
 
         <label for='status'>Status:</label>
-        <input type='text' v-model='spr.status' id='status' />
-        
+        <select v-model='spr.status' id='status' name='status'>
+            <option v-for='stat in spr_status' :key='stat.id'>{{ stat }}</option>
+        </select>
+        {{spr.status}}
         <input type='submit' value='Add' @click.prevent='addSPR' />
 
         <transition name='fade'>
@@ -42,31 +51,32 @@ export default {
     props: ['slug'],
     data: function() {
         return {
-            added: false,
+            saved: false,
             spr:  {
                 title: '',
                     slug: '',
-                    priority: '',
-                    status: '',
+                    priority: 'Low',
+                    status: 'New',
                     reportedBy: '',
-                    type: false,
+                    type: 'Enhancement',
                     description: ''
-            }
+            },
+            spr_status: ['New','Verified','Resolved','Rejected']
         };
     },
     methods: {
         addSPR: function() {
             app.api.add('sprs', this.spr).then(id => {
                 console.log('SPR was added with the id: ' + id);
-                this.added = true;
-                setTimeout(() => (this.added = false), 3000);
+                this.saved = true;
+                setTimeout(() => (this.saved = false), 3000);
                 this.spr = {
                     title: '',
                     slug: '',
-                    priority: '',
-                    status: '',
+                    priority: 'Low',
+                    status: 'New',
                     reportedBy: '',
-                    type: false,
+                    type: 'Enhancement',
                     description: ''
                 };
             });
@@ -85,7 +95,6 @@ input[type='text'] {
 }
 textarea {
     height: 75px;
-    display: block;
     margin: auto;
 }
 label {
@@ -97,4 +106,5 @@ input[type='submit'] {
     display: inline-block;
     margin-top: 10px;
 }
+
 </style>

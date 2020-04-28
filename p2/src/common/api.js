@@ -25,7 +25,24 @@ export default class Api {
         try {
             const querySnapshot = await this.api.collection(collection).where(field, "==", value)
                 .get();
+                //querySnapshot.forEach(function (doc) {
+                    //console.log(doc.id, ' => ', doc.data());
+                //});
+                console.log(querySnapshot.size);
+                
             return querySnapshot.docs.shift().data();
+        }
+        catch (error) {
+            return 'Error getting documents: ' + error;
+        }
+    }
+
+    async count(collection, field, value) {
+        try {
+            const querySnapshot = await this.api.collection(collection).where(field, "==", value)
+                .get();
+                
+            return querySnapshot.size;
         }
         catch (error) {
             return 'Error getting documents: ' + error;
@@ -71,23 +88,18 @@ export default class Api {
     /**
      * Update a document to a collection
      */
-    async save(collection, document) {
-        try {
-            const docRef = await this.api
-                .collection(collection)
-                .doc(document)
-                .update(document);
-            return docRef.id;
-        }
-        catch (error) {
-            return 'Error saving document: ' + error;
-        }
+    save(collection, id) {
+        this.api
+            .collection(collection)
+            .doc(id)
+            .set();
     }
 
     /**
-     * Delete a document from a collection by id
+     * Delete a document from a collection by slug
      */
-    delete(collection, id) {
+    delete(collection, id) {        
+
         this.api
             .collection(collection)
             .doc(id)

@@ -53,7 +53,8 @@ export default {
     },
     methods: {
         saveEdits: function() {
-            app.api.save('sprs', this.spr).then(response => {
+            console.log(this.spr);
+            app.api.save('sprs', this.spr.id).then(response => {
                 console.log('SPR was saved', response);
                 this.saved = true;
                 setTimeout(() => (this.saved = false), 3000);

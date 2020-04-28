@@ -14,20 +14,25 @@
                         2. Clicking again should sort in descending order
                         3. Status and Priority should be sorted differently 
                     -->
-                <th v-for='col in columns' v-on:click='sortTable(col)' :key='col.slug'>{{ col }}</th>
+<!--                <th v-for='col in columns' v-on:click='sortTable(col)' :key='col.slug'>{{ col }}</th> -->
+                <th v-for='col in columns' :key='col.slug'>{{ col }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for='spr in sprs' :key='spr.slug'>
-                <td>{{ spr.spr_id }}</td>
+                <td></td>
                 <td>{{ spr.title }}</td>
                 <td>{{ spr.description }}</td>
                 <td>{{ spr.priority }}</td>
                 <td>{{ spr.status }}</td>
-                <td><router-link :to='{name:"spr", params: {slug: spr.slug}}'>Manage</router-link></td>
+                <td><router-link :to='{name:"spr", params: {slug: spr.slug}}'><img alt='edit spr' id='icon' src='@/assets/images/edit.png'></router-link>
+                    <img alt='delete spr' id='icon' src='@/assets/images/delete.png' v-on:click='deleteSPR(spr)'/></td>
                 </tr>
             </tbody>
         </table>
+    <div> 
+      Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+    </div>
     </div>
 </template>
 <script>
@@ -52,7 +57,7 @@ export default {
         });
     },
     methods: {
-    'sortTable': function sortTable(col) {
+    /*'sortTable': function sortTable(col) {
       if (this.sortColumn === col) {
         this.ascending = !this.ascending;
       } else {
@@ -64,7 +69,7 @@ export default {
 
       console.log("Sorting", this.sortColumn, this.ascending);
       console.log(this.sprs);
-      this.sprs.sort(function(a, b) {
+      this.sprs.items.sort(function(a, b) {
         if (a[col] > b[col]) {
           return ascending ? 1 : -1
         } else if (a[col] < b[col]) {
@@ -72,7 +77,12 @@ export default {
         }
         return 0;
       })
-    },
+    },*/
+    'deleteSPR': function deleteSPR(spr) {
+      console.log("Delete ", spr, spr.id);
+//      console.log(app.api.find('sprs','slug',spr.slug));
+      app.api.delete('sprs', spr.id);
+    }
   }
 }
 
@@ -95,10 +105,11 @@ table th {
     padding: 8px;
     min-width: 30px;
 }
+/*
 table th:hover {
     background: #717699;
 }
-
+*/
 table td {
   text-align: left;
   padding: 8px;
@@ -111,4 +122,9 @@ table tbody tr:nth-child(2n) td {
   background: #D4D8F9;
 }
 
+#icon {
+  width: 25px;
+  margin-right: 10px;
+}
 </style>
+
