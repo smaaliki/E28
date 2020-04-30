@@ -71,6 +71,7 @@ export default {
             app.api.all('sprs').then(response => {
             this.spr.index = response.length+1;
             app.api.add('sprs', this.spr).then(id => {
+                console.log('SPR with ID ', id, ' was saved');
                 this.saved = true;
                 setTimeout(() => (this.saved = false), 3000);
                 this.spr = {

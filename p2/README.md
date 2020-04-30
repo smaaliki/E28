@@ -36,5 +36,6 @@ I used a codepen example for radio buttons:
 [https://codepen.io/yanxyz/pen/pyOQMy](https://codepen.io/yanxyz/pen/pyOQMy)
 
 ## Notes for instructor
-
+I need to figure out the proper use of *.then()* promise as it casued errors when I didn't use the *response*.
+ 
 **Note:** The admin page is for test reasons only.

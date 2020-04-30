@@ -64,6 +64,7 @@ export default {
     methods: {
         saveEdits: function() {
             app.api.update('sprs', this.spr.slug, this.spr).then(response => {
+                console.log(response);
                 this.saved = true;
                 setTimeout(() => (this.saved = false), 3000);
         });
