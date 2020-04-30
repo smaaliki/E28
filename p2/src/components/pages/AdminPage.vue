@@ -34,7 +34,8 @@ export default {
             for (let collectionName in this.collections) {
                 app.api.all(collectionName).then(collection => {
                     Object.keys(collection).forEach(key => {
-                        app.api.delete(collectionName, key);
+                        app.api.delete(collectionName, collection[key].id);
+                        console.log(collection[key].id);
                     });
                 });
             }

@@ -10,9 +10,9 @@ import CreateSPRPage from '@/components/pages/CreateSPRPage.vue';
 
 Vue.use(VueRouter);
 const routes = [
-  { path: '/', component: HomePage, name: 'home' },
-  { path: '/sprs', component: SPRsPage, name: 'sprs' },
-  { path: '/dashboard', component: DashboardPage, name: 'dashboard' },
+  { path: '/', component: HomePage, name: 'Home' },
+  { path: '/sprs', component: SPRsPage, name: 'SPRs' },
+  { path: '/dashboard', component: DashboardPage, name: 'Dashboard' },
   { path: '/admin', component: AdminPage, name: 'admin' },
   { path: '/spr/:slug', component: SPRPage, name: 'spr', props: true },
   { path: '/sprs/create', component: CreateSPRPage, name: 'add an spr' },

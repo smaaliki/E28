@@ -13,15 +13,24 @@
         <label for='reportedBy'>Reported By:</label>
         <input type='text' v-model='spr.reportedBy' id='reportedBy' />
 
+        
         <label for='priority'>Priority:</label>
-        <input type='text' v-model='spr.priority' id='priority' />
+        <input type='radio' v-model='spr.priority' value='High'>High
+        <input type='radio' v-model='spr.priority' value='Medium'>Medium
+        <input type='radio' v-model='spr.priority' value='Low'>Low
+        <br />
 
         <label for='type'>Type:</label>
-        <input type='text' v-model='spr.type' id='type' />
+        <input type='radio' v-model='spr.type' value='New Feature'>New Feature
+        <input type='radio' v-model='spr.type' value='Enhancement'>Enhancement
+        <input type='radio' v-model='spr.type' value='Issue'>Issue
+        <br />
 
         <label for='status'>Status:</label>
-        <input type='text' v-model='spr.status' id='status' />
-        
+        <select v-model='spr.status' id='status' name='status'>
+            <option v-for='stat in spr_status' :key='stat.id'>{{ stat }}</option>
+        </select>
+        <br/>
         <input type='submit' value='Save' @click.prevent='saveEdits' />
 
         <transition name='fade'>
@@ -29,7 +38,7 @@
         </transition>
 
         <p>
-            <router-link :to='{name: "sprs"}'>&larr; Return to SPRs list</router-link>
+            <router-link :to='{name: "SPRs"}'>&larr; Return to SPRs list</router-link>
         </p>
     </div>
 </template>
@@ -43,38 +52,42 @@ export default {
     data: function() {
         return {
             saved: false,
-            spr: null
+            spr: null,
+            spr_status: ['New','Verified','Resolved','Rejected']
         };
     },
     mounted: function () {
-        app.api.get('sprs', this.slug).then(response => {
-        this.spr = response;
-    });
+        console.log('ID in mounted: ', this.slug);
+        app.api.find('sprs', 'slug', this.slug).then(response => {
+            this.spr = response;
+            console.log('SPR in mounted: ', this.spr);
+        });
     },
     methods: {
         saveEdits: function() {
             console.log(this.spr);
-            app.api.save('sprs', this.spr.id).then(response => {
+            app.api.update('sprs', this.spr.id, this.spr).then(response => {
                 console.log('SPR was saved', response);
                 this.saved = true;
                 setTimeout(() => (this.saved = false), 3000);
         });
         }
-}
+    }
 };
 </script>
 
 <style scoped>
 input {
-    font-size: 15pt;
+    font-size: 12pt;
 }
 textarea,
 input[type='text'] {
     width: 50%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12pt;
 }
 textarea {
     height: 75px;
-    display: block;
     margin: auto;
 }
 label {

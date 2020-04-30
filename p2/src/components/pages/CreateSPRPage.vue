@@ -20,7 +20,7 @@
         <input type='radio' v-model='spr.priority' value='Low'>Low
         <br />
 
-        <label for='priority'>Priority:</label>
+        <label for='type'>Type:</label>
         <input type='radio' v-model='spr.type' value='New Feature'>New Feature
         <input type='radio' v-model='spr.type' value='Enhancement'>Enahncement
         <input type='radio' v-model='spr.type' value='Issue'>Issue
@@ -30,7 +30,7 @@
         <select v-model='spr.status' id='status' name='status'>
             <option v-for='stat in spr_status' :key='stat.id'>{{ stat }}</option>
         </select>
-        {{spr.status}}
+        <br/>
         <input type='submit' value='Add' @click.prevent='addSPR' />
 
         <transition name='fade'>
@@ -38,7 +38,7 @@
         </transition>
 
         <p>
-            <router-link :to='{name: "sprs"}'>&larr; Return to SPRs list</router-link>
+            <router-link :to='{name: "SPRs"}'>&larr; Return to SPRs list</router-link>
         </p>
     </div>
 </template>
@@ -53,24 +53,30 @@ export default {
         return {
             saved: false,
             spr:  {
+                index: 0,
                 title: '',
-                    slug: '',
-                    priority: 'Low',
-                    status: 'New',
-                    reportedBy: '',
-                    type: 'Enhancement',
-                    description: ''
+                slug: '',
+                priority: 'Low',
+                status: 'New',
+                reportedBy: '',
+                type: 'Enhancement',
+                description: ''
             },
             spr_status: ['New','Verified','Resolved','Rejected']
         };
     },
     methods: {
         addSPR: function() {
+            /* There's got to be a better way to do this */
+            app.api.all('sprs').then(response => {
+            this.spr.index = response.length+1;
+            console.log("index ", this.spr.index);   
             app.api.add('sprs', this.spr).then(id => {
-                console.log('SPR was added with the id: ' + id);
+                console.log('SPR with index' , this.spr.index, 'was added with the id: ' + id);
                 this.saved = true;
                 setTimeout(() => (this.saved = false), 3000);
                 this.spr = {
+                    index: 0,
                     title: '',
                     slug: '',
                     priority: 'Low',
@@ -80,6 +86,7 @@ export default {
                     description: ''
                 };
             });
+        });
         }
     }
 };
@@ -87,11 +94,13 @@ export default {
 
 <style scoped>
 input {
-    font-size: 15pt;
+    font-size: 12pt;
 }
 textarea,
 input[type='text'] {
     width: 50%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12pt;
 }
 textarea {
     height: 75px;

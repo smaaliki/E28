@@ -25,12 +25,8 @@ export default class Api {
         try {
             const querySnapshot = await this.api.collection(collection).where(field, "==", value)
                 .get();
-                //querySnapshot.forEach(function (doc) {
-                    //console.log(doc.id, ' => ', doc.data());
-                //});
-                console.log(querySnapshot.size);
-                
-            return querySnapshot.docs.shift().data();
+            
+                return querySnapshot.docs.shift().data();
         }
         catch (error) {
             return 'Error getting documents: ' + error;
@@ -50,22 +46,24 @@ export default class Api {
     }
 
     /**
-     * Get a document from a collection by its id
+     * Get a document from a collection by its slug
      */
-    get(collection, slug) {
-        return this.find(collection, 'slug', slug);
+    get(collection, id) {
+        return this.find(collection, 'id', id);
     }
 
     /**
      * Get all the documents from a collection
      */
     async all(collection) {
-        let results = {};
+        let results = [];
         const querySnapshot = await this.api
             .collection(collection)
             .get();
         querySnapshot.forEach(doc => {
-            results[doc.id] = doc.data();
+            const myDoc = doc.data()
+                    myDoc.id = doc.id
+                    results.push(myDoc)
         });
         return results;
     }
@@ -88,18 +86,24 @@ export default class Api {
     /**
      * Update a document to a collection
      */
-    save(collection, id) {
-        this.api
-            .collection(collection)
-            .doc(id)
-            .set();
+    async update(collection, id, document) {
+        console.log('Update ', document.id, document);
+        try {
+            const docRef = await this.api
+                .collection(collection)
+                .doc(document.id)
+                .set(document);
+            return docRef.id;
+        }
+        catch (error) {
+            return 'Error updating document: ' + error;
+        }
     }
 
     /**
-     * Delete a document from a collection by slug
+     * Delete a document from a collection by id
      */
     delete(collection, id) {        
-
         this.api
             .collection(collection)
             .doc(id)

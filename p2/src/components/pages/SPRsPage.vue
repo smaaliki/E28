@@ -8,25 +8,23 @@
         </div>
         <table id="firstTable">
             <thead>
-                <tr>
                     <!-- Todo: Improve the sorting functionality: 
                         1. Actions column should not be sortable
                         2. Clicking again should sort in descending order
                         3. Status and Priority should be sorted differently 
                     -->
-<!--                <th v-for='col in columns' v-on:click='sortTable(col)' :key='col.slug'>{{ col }}</th> -->
+<!--                <th v-for='col in columns' v-on:click='sortTable(col)' :key='col.slug'>{{ col }}</th>-->
                 <th v-for='col in columns' :key='col.slug'>{{ col }}</th>
-                </tr>
             </thead>
             <tbody>
-                <tr v-for='spr in sprs' :key='spr.slug'>
-                <td></td>
+                <tr v-for='spr in sprs' :key='spr.id'>
+                <td>SPR_{{spr.index}}</td>
                 <td>{{ spr.title }}</td>
                 <td>{{ spr.description }}</td>
                 <td>{{ spr.priority }}</td>
                 <td>{{ spr.status }}</td>
                 <td><router-link :to='{name:"spr", params: {slug: spr.slug}}'><img alt='edit spr' id='icon' src='@/assets/images/edit.png'></router-link>
-                    <img alt='delete spr' id='icon' src='@/assets/images/delete.png' v-on:click='deleteSPR(spr)'/></td>
+                    <img alt='delete spr' id='icon' src='@/assets/images/delete.png' v-on:click='deleteSPR(spr.id)'/></td>
                 </tr>
             </tbody>
         </table>
@@ -37,7 +35,6 @@
 </template>
 <script>
 import * as app from '@/common/app.js';
-//import { sprs} from '@/seeds/sprs.js';
 
 export default {
     name:'',
@@ -45,6 +42,7 @@ export default {
     },
     data: function() {
         return{
+            myIndex: 0,
             sprs: [],
             columns: ['id', 'title', 'description', 'priority', 'status', 'actions'],
             ascending: false,
@@ -78,10 +76,12 @@ export default {
         return 0;
       })
     },*/
-    'deleteSPR': function deleteSPR(spr) {
-      console.log("Delete ", spr, spr.id);
-//      console.log(app.api.find('sprs','slug',spr.slug));
-      app.api.delete('sprs', spr.id);
+    'deleteSPR': function deleteSPR(id) {
+      console.log(id);
+      app.api.delete('sprs', id);
+      app.api.all('sprs').then(response => {
+            this.sprs = response;
+        });
     }
   }
 }
