@@ -30,10 +30,16 @@
             <li>To edit an SPR, click on the Edit icon for that SPR.</li>
             <li>To delete an SPR, click on the Delete icon for that SPR.</li>
             <li>To view a simple dashboard of the SPRs, go to the Dashboard link in the menu.</li>
+            <li>To re-seed the data, visit the <router-link :to='{name:"admin"}'>Admin</router-link> page</li>
         </ul>  
-        <h3>Known Issues</h3>
+        <h3>Things I'd like to improve:</h3>
         <ul>
-            <li>The index when an SPR is created needs to be fixed.</li>
+            <li>Sorting the columns in the SPR table</li>
+            <li>Automatically create the slug based on the title</li>
+            <li>Display the SPR info when a user hovers over the SPR title</li>
+            <li>Change the dashboard to a graphical one, rather than just numbers</li> 
+            <li>Add a filter to filter SPRs in the table</li>
+            <li>Add date created, and date resolved for SPRs</li> 
         </ul>
     </div>
 </template>

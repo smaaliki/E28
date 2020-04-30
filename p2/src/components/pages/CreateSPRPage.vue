@@ -70,9 +70,7 @@ export default {
             /* There's got to be a better way to do this */
             app.api.all('sprs').then(response => {
             this.spr.index = response.length+1;
-            console.log("index ", this.spr.index);   
             app.api.add('sprs', this.spr).then(id => {
-                console.log('SPR with index' , this.spr.index, 'was added with the id: ' + id);
                 this.saved = true;
                 setTimeout(() => (this.saved = false), 3000);
                 this.spr = {

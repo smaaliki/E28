@@ -86,18 +86,20 @@ export default class Api {
     /**
      * Update a document to a collection
      */
-    async update(collection, id, document) {
-        console.log('Update ', document.id, document);
-        try {
-            const docRef = await this.api
-                .collection(collection)
-                .doc(document.id)
-                .set(document);
-            return docRef.id;
-        }
-        catch (error) {
-            return 'Error updating document: ' + error;
-        }
+    async update(collection, slug, document) {
+        /*https://stackoverflow.com/questions/53480572/having-trouble-updating-a-document-in-vue-js-using-firebases-firestore*/      
+        this.api.collection('sprs')
+        .where('slug', '==', slug)
+        .get()
+        .then(snap => {
+          return snap.docs[0].ref.set(document);
+        })
+        .then(() => {
+          console.log('Successfully updated the record')
+        })
+        .catch(error => {
+          console.error('There was an error editing the record: ' + error)
+        })
     }
 
     /**

@@ -77,7 +77,6 @@ export default {
       })
     },*/
     'deleteSPR': function deleteSPR(id) {
-      console.log(id);
       app.api.delete('sprs', id);
       app.api.all('sprs').then(response => {
             this.sprs = response;

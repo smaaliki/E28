@@ -57,17 +57,13 @@ export default {
         };
     },
     mounted: function () {
-        console.log('ID in mounted: ', this.slug);
         app.api.find('sprs', 'slug', this.slug).then(response => {
             this.spr = response;
-            console.log('SPR in mounted: ', this.spr);
         });
     },
     methods: {
         saveEdits: function() {
-            console.log(this.spr);
-            app.api.update('sprs', this.spr.id, this.spr).then(response => {
-                console.log('SPR was saved', response);
+            app.api.update('sprs', this.spr.slug, this.spr).then(response => {
                 this.saved = true;
                 setTimeout(() => (this.saved = false), 3000);
         });
