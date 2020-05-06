@@ -9,3 +9,10 @@ Users will be able to modify the title and some basic aspects of th
 I will also investigate the usage of tables in single point applications and implement it to make the page look more professional.
 
 If time allows, I will invetigate allowing users to add multiple series on the same plot
+
+# Refrences:
+For finding the maximum in an array of ojects:
+https://stackoverflow.com/questions/22621865/how-to-update-an-svg-path-with-d3-js
+
+For the plot axis:
+https://www.d3-graph-gallery.com/graph/custom_axis.html
