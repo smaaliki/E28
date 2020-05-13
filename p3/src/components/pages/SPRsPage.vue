@@ -78,11 +78,11 @@ export default {
     },*/
     'deleteSPR': function deleteSPR(id) {
       app.api.delete('sprs', id);
-      app.api.all('sprs').then(response => {
+      /*app.api.all('sprs').then(response => {
             this.sprs = response;
-        });
+        });*/
       this.$store.commit('updateSPRCount', -1);
-
+      this.$store.dispatch('setSPRs');
     }
   },
   computed: {

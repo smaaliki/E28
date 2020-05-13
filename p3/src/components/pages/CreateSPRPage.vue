@@ -86,6 +86,7 @@ export default {
                 };
             });
             this.$store.commit('updateSPRCount', 1);
+            this.$store.dispatch('setSPRs');
         });
         }
     }
