@@ -43,16 +43,16 @@ export default {
     data: function() {
         return{
             myIndex: 0,
-            sprs: [],
+            //sprs: [],
             columns: ['id', 'title', 'description', 'priority', 'status', 'actions'],
             ascending: false,
             sortColumn: '',
     };
     },
     mounted: function () {
-         app.api.all('sprs').then(response => {
-            this.sprs = response;
-        });
+        // app.api.all('sprs').then(response => {
+        //    this.sprs = response;
+        //});
     },
     methods: {
     /*'sortTable': function sortTable(col) {
@@ -81,6 +81,13 @@ export default {
       app.api.all('sprs').then(response => {
             this.sprs = response;
         });
+      this.$store.commit('updateSPRCount', -1);
+
+    }
+  },
+  computed: {
+    sprs: function() {
+        return this.$store.state.sprs;
     }
   }
 }

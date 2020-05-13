@@ -85,6 +85,7 @@ export default {
                     description: ''
                 };
             });
+            this.$store.commit('updateSPRCount', 1);
         });
         }
     }

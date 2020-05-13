@@ -45,6 +45,18 @@ export default class Api {
         }
     }
 
+    async totalCount(collection) {
+        try {
+            const querySnapshot = await this.api.collection(collection)
+                .get();
+                
+            return querySnapshot.size;
+        }
+        catch (error) {
+            return 'Error getting documents: ' + error;
+        }
+    }
+    
     /**
      * Get a document from a collection by its slug
      */

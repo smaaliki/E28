@@ -7,6 +7,7 @@ import DashboardPage from '../src/components/pages/DashboardPage.vue';
 import AdminPage from '../src/components/pages/AdminPage.vue';
 import SPRPage from '@/components/pages/SPRPage.vue';
 import CreateSPRPage from '@/components/pages/CreateSPRPage.vue';
+import store from '@/common/store';
 
 Vue.use(VueRouter);
 const routes = [
@@ -26,6 +27,7 @@ const router = new VueRouter({
 })
 
 new Vue({
+  store: store,
   router: router,
   render: h => h(App),
 }).$mount('#app')

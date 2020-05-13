@@ -52,14 +52,9 @@ export default {
     data: function() {
         return {
             saved: false,
-            spr: null,
+            //spr: null,
             spr_status: ['New','Verified','Resolved','Rejected']
         };
-    },
-    mounted: function () {
-        app.api.find('sprs', 'slug', this.slug).then(response => {
-            this.spr = response;
-        });
     },
     methods: {
         saveEdits: function() {
@@ -69,7 +64,12 @@ export default {
                 setTimeout(() => (this.saved = false), 3000);
         });
         }
+    },
+    computed: {
+    spr() {
+        return this.$store.getters.getSPRBySlug(this.slug);
     }
+}
 };
 </script>
 

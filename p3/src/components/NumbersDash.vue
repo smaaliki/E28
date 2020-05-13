@@ -23,7 +23,6 @@
     </div>
 </template>
 <script>
-import * as app from '@/common/app.js';
 
 export default {
     name:'',
@@ -31,51 +30,53 @@ export default {
     },
     data: function() {
         return{
-            type: [0,0,0],
-            priority: [0,0,0],
-            status: [0,0,0,0],
         };
     },
-    mounted: function () {
-        
-        /* Reset the types and update */
-        this.type = [];
-        app.api.count('sprs','type', 'New Feature').then(response => {
-            this.type.push(response);
-        });
-        app.api.count('sprs','type', 'Enhancement').then(response => {
-            this.type.push(response);
-        });
-        app.api.count('sprs','type', 'Issue').then(response => {
-            this.type.push(response);
-        });
-        
-        /* Reset the priority and update */
-        this.priority = [];
-        app.api.count('sprs','priority', 'High').then(response => {
-            this.priority.push(response);
-        });
-        app.api.count('sprs','priority', 'Medium').then(response => {
-            this.priority.push(response);
-        });
-        app.api.count('sprs','priority', 'Low').then(response => {
-            this.priority.push(response);
-        });
-
-        /* Reset the status and update */
-        this.status = [];
-        app.api.count('sprs','status', 'New').then(response => {
-            this.status.push(response);
-        });
-        app.api.count('sprs','status', 'Verified').then(response => {
-            this.status.push(response);
-        });
-        app.api.count('sprs','status', 'Resolved').then(response => {
-            this.status.push(response);
-        });
-        app.api.count('sprs','status', 'Rejected').then(response => {
-            this.status.push(response);
-        });
+    computed: {
+        type: function () {
+            let type = [0,0,0];
+            Object.keys(this.sprs).map(key => {
+                if (this.sprs[key].type == 'New Feature') {
+                    type[0]++;
+                } else if (this.sprs[key].type == 'Enhancement') {
+                    type[1]++;
+                } else if (this.sprs[key].type == 'Issue') {
+                    type[2]++;
+                } 
+            });
+            return type;
+        },
+        priority: function () {
+            let priority = [0,0,0];
+            Object.keys(this.sprs).map(key => {
+                if (this.sprs[key].priority == 'High') {
+                    priority[0]++;
+                } else if (this.sprs[key].priority == 'Medium') {
+                    priority[1]++;
+                } else if (this.sprs[key].priority == 'Low') {
+                    priority[2]++;
+                } 
+            });
+            return priority;
+        },
+        status: function () {
+            let status = [0,0,0,0];
+            Object.keys(this.sprs).map(key => {
+                if (this.sprs[key].status == 'New') {
+                    status[0]++;
+                } else if (this.sprs[key].status == 'Verified') {
+                    status[1]++;
+                } else if (this.sprs[key].status == 'Resolved') {
+                    status[2]++;
+                } else if (this.sprs[key].status == 'Rejected') {
+                    status[3]++;
+                } 
+            });
+            return status;
+        },
+        sprs: function() {
+            return this.$store.state.sprs;
+        }
     }        
 }
 </script>

@@ -1,7 +1,5 @@
 <template>
     <div>
-        <p>This is the homepage. It will be a landing page at some point</p>
-
         <!--    <show-featured :category='featuredCategory'></show-featured>-->
         <h1>E28: Project 3</h1>
         <h2>System Problem Reports</h2>
