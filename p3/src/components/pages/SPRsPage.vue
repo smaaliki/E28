@@ -4,7 +4,7 @@
         <p>Below is the list of the System Problem Reports (SPRs) that have been reported through the system.</p>
         <div id='SPRs'>
         <h2 style='float:left'>SPRs</h2>
-        <router-link :to='{name:"addSpr"}'><button style='float:right'>Add SPR</button></router-link>
+        <router-link :to='{name:"addSpr"}'><button data-test='add-spr-button' style='float:right'>Add SPR</button></router-link>
         </div>
         <table id="firstTable">
             <thead>
@@ -19,13 +19,13 @@
             <tbody>
                 <tr v-for='spr in sprs' :key='spr.id'>
                 <td>SPR_{{spr.index}}</td>
-                <td>{{ spr.title }}</td>
+                <td data-test='spr-title'>{{ spr.title }}</td>
                 <td>{{ spr.description }}</td>
                 <td>{{ spr.priority }}</td>
                 <td>{{ spr.status }}</td>
-                <td><router-link :to='{name:"viewSpr", params: {spr: spr}}'><img alt='view spr' id='icon' src='@/assets/images/view.png'></router-link>
-                    <router-link :to='{name:"spr", params: {slug: spr.slug}}'><img alt='edit spr' id='icon' src='@/assets/images/edit.png'></router-link>
-                    <img alt='delete spr' id='icon' src='@/assets/images/delete.png' v-on:click='deleteSPR(spr.id)'/></td>
+                <td><router-link data-test='view-spr' :to='{name:"viewSpr", params: {spr: spr}}'><img alt='view spr' id='icon' src='@/assets/images/view.png'></router-link>
+                    <router-link data-test='edit-spr' :to='{name:"spr", params: {slug: spr.slug}}'><img alt='edit spr' id='icon' src='@/assets/images/edit.png'></router-link>
+                    <img data-test='delete-spr' alt='delete spr' id='icon' src='@/assets/images/delete.png' v-on:click='deleteSPR(spr.id)'/></td>
                 </tr>
             </tbody>
         </table>

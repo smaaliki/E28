@@ -8,6 +8,7 @@
             type='text' 
             v-model='$v.spr.title.$model' 
             id='title'
+            data-test='spr-title-input'
             :class='{ "form-input-error": $v.spr.title.$error }' 
         />
         <small class='form-help'>Min: 5 chars</small>
@@ -31,6 +32,7 @@
             type='text' 
             v-model='$v.spr.slug.$model' 
             id='slug' 
+            data-test='spr-slug-input'
             :class='{ "form-input-error": $v.spr.slug.$error }' 
         />
         <small class='form-help'>Min: 5 chars</small>
@@ -57,6 +59,7 @@
         <textarea 
             v-model='$v.spr.description.$model' 
             id='description'
+            data-test='spr-description-textarea'
             :class='{ "form-input-error": $v.spr.description.$error }' 
         ></textarea>
         <small class='form-help'>Min: 25 chars</small>
@@ -80,6 +83,7 @@
             type='text' 
             v-model='$v.spr.reportedBy.$model' 
             id='reportedBy' 
+            data-test='spr-reportedBy-input'
             :class='{ "form-input-error": $v.spr.reportedBy.$error }' 
         />
         <small class='form-help'>Min: 25 chars</small>
@@ -115,16 +119,16 @@
             <option v-for='stat in spr_status' :key='stat.id'>{{ stat }}</option>
         </select>
         <br/>
-        <button @click.prevent='addSPR'>Add SPR</button>
+        <button data-test='add-spr-button' @click.prevent='addSPR'>Add SPR</button>
 
         <div class='form-feedback-error' v-if='$v.$anyError'>Please correct the above errors</div>
         
         <transition name='fade'>
-            <div class='alert' v-if='saved'>SPR was saved!</div>
+            <div data-test="spr-added-confirmation" class='alert' v-if='saved'>SPR was saved!</div>
         </transition>
 
         <p>
-            <router-link :to='{name: "SPRs"}'>&larr; Return to SPRs list</router-link>
+            <router-link data-test='return-to-sprs' :to='{name: "SPRs"}'>&larr; Return to SPRs list</router-link>
         </p>
     </div>
 </template>
