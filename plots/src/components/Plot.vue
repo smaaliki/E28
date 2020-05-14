@@ -1,41 +1,7 @@
 <template>
   <div>
     <h1>Let's Plot with D3.js and Vue!</h1>
-    <div id='data_div'>
-      <h2>Our data is</h2>
-      <table>
-        <thead id="dataTable">
-          <th>index</th>
-          <th>x Data</th>
-          <th>y Data</th>
-          <th>Actions</th>
-        </thead>
-        <tbody>
-          <tr v-for='(data,index) in myData' :key='index'>
-            <td>{{ index+1 }}</td>
-            <td>{{ data.x }}</td>
-            <td>{{ data.y }}</td>
-            <td>
-              <!--<img alt='edit data point' id='icon' src='@/assets/images/edit.png' v-on:click='editPoint(index)'/>-->
-              <img alt='delete data point' id='icon' src='@/assets/images/delete.png' v-on:click='deletePoint(index)'/>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div id='point_div'>
-      <label for='xpoint'>x:</label>
-      <input type='text' v-model='tempPoint.x' id='xpoint' />
-      <br/>
-      
-      <label for='ypoint'>y:</label>
-      <input type='text' v-model='tempPoint.y' id='ypoint' />
-      <br/>
-      <button @click.prevent='addPoint'>Add Point</button>
-      </div>
-    </div>
-    <!--<ul>
-      <li>npm install d3</li>
-    </ul>-->
+    <data-table></data-table>
   <div id='plot_div'>
       <h2>Plot Settings</h2>
     <div>
@@ -46,10 +12,7 @@
       <label for='linewidth'>Line Width:</label>
       <input type='text' v-model='settings.lineWidth' id='linewidth' @change='updateLineWidth'/>
       <br/>
-      
-<!--      <input type='submit' value='update' @click.prevent='drawPlot' />-->
     </div>
-
     <div>
       <p>Plot Width: {{ plotWidth }}</p>
       <p>Plot Height: {{ plotHeight }}</p>
@@ -62,10 +25,14 @@
 
 <script>
 import * as d3 from 'd3'
+import DataTable from '@/components/Data.vue'
 
 //https://www.d3-graph-gallery.com/graph/line_basic.html
 export default {
   name: 'Plot',
+  components: {
+        'data-table': DataTable
+    },
   data: function() {
     return{
       myData: [ { x: 1, y: 2 }, 
@@ -162,7 +129,7 @@ export default {
           .attr("class","chartline");
     },
     'drawPlot': function drawPlot() {
-      console.log(Math.max.apply(Math, this.myData.map(function(o) { return o.x; })), Math.max.apply(Math, this.myData.map(function(o) { return o.y; })));
+      //console.log(Math.max.apply(Math, this.myData.map(function(o) { return o.x; })), Math.max.apply(Math, this.myData.map(function(o) { return o.y; })));
       // Update X axis
       var x = d3.scaleLinear()
         .domain([0, Math.max.apply(Math, this.myData.map(function(o) { return o.x; }))])

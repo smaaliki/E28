@@ -8,6 +8,7 @@
         />-->
         <p class='description'>{{ product.description }}</p>
         <div class='price'>${{ product.price }}</div>
+    <button @click-'addToCart(slug)'>Add to cart </button>
 
         <router-link :to='{name: "products"}'>&larr; Return to all products</router-link>
     </div>
@@ -30,6 +31,11 @@ export default {
          app.api.get('products', this.slug).then(response => {
             this.product = response;
         });
+    },
+    methods: {
+        addToCart: function (slug) {
+            console.log('Add to Cart: ',slug);
+        }
     }
 
 };

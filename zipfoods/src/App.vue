@@ -23,7 +23,15 @@ export default {
             links: ['home', 'products', 'categories', 'add a product']
         };
     },
-    mounted: function() {}
+    mounted: function() {
+        localStorage.setItem('cartCount','5');
+        let prefsObj = {
+            fontsize: '12',
+            mode: 'dark'
+        };
+
+        localStorage.setItem('prefsObj', JSON.stringify(prefsObj));
+    }
 };
 </script>
 
