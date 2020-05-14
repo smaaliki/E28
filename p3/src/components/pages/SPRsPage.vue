@@ -4,7 +4,7 @@
         <p>Below is the list of the System Problem Reports (SPRs) that have been reported through the system.</p>
         <div id='SPRs'>
         <h2 style='float:left'>SPRs</h2>
-        <router-link :to='{name:"add an spr"}'><button style='float:right'>Add SPR</button></router-link>
+        <router-link :to='{name:"addSpr"}'><button style='float:right'>Add SPR</button></router-link>
         </div>
         <table id="firstTable">
             <thead>
@@ -23,7 +23,8 @@
                 <td>{{ spr.description }}</td>
                 <td>{{ spr.priority }}</td>
                 <td>{{ spr.status }}</td>
-                <td><router-link :to='{name:"spr", params: {slug: spr.slug}}'><img alt='edit spr' id='icon' src='@/assets/images/edit.png'></router-link>
+                <td><router-link :to='{name:"viewSpr", params: {spr: spr}}'><img alt='view spr' id='icon' src='@/assets/images/view.png'></router-link>
+                    <router-link :to='{name:"spr", params: {slug: spr.slug}}'><img alt='edit spr' id='icon' src='@/assets/images/edit.png'></router-link>
                     <img alt='delete spr' id='icon' src='@/assets/images/delete.png' v-on:click='deleteSPR(spr.id)'/></td>
                 </tr>
             </tbody>
@@ -41,18 +42,12 @@ export default {
     components: {   
     },
     data: function() {
-        return{
-            myIndex: 0,
-            //sprs: [],
-            columns: ['id', 'title', 'description', 'priority', 'status', 'actions'],
-            ascending: false,
-            sortColumn: '',
-    };
-    },
-    mounted: function () {
-        // app.api.all('sprs').then(response => {
-        //    this.sprs = response;
-        //});
+      return{
+          myIndex: 0,
+          columns: ['id', 'title', 'description', 'priority', 'status', 'actions'],
+          ascending: false,
+          sortColumn: '',
+      };
     },
     methods: {
     /*'sortTable': function sortTable(col) {
@@ -77,10 +72,9 @@ export default {
       })
     },*/
     'deleteSPR': function deleteSPR(id) {
+      //console.log(id);
       app.api.delete('sprs', id);
-      /*app.api.all('sprs').then(response => {
-            this.sprs = response;
-        });*/
+
       this.$store.commit('updateSPRCount', -1);
       this.$store.dispatch('setSPRs');
     }
@@ -96,7 +90,7 @@ export default {
 <style scoped>
 table {
     font-family: 'Open Sans', sans-serif;
-    width: 750px;
+    width: 850px;
     border-collapse: collapse;
     border: 3px solid #44475C;
     margin: 10px 10px 0 10px;
@@ -123,6 +117,7 @@ table td {
 }
 table td:last-child {
   border-right: none;
+  min-width: 130px;
 }
 table tbody tr:nth-child(2n) td {
   background: #D4D8F9;

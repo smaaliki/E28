@@ -4,10 +4,10 @@
     <nav>
         <ul>
             <li v-for='link in links' :key='link'>
-                <router-link :to='{ name: link }' exact>
-    {{ link }}
-    <span v-if='link == "SPRs"'>({{ sprCount }})</span>
-</router-link>
+              <router-link :to='{ name: link }' exact>
+                {{ link }}
+                <span v-if='link == "SPRs"'>({{ sprCount }})</span>
+              </router-link>
             </li>
         </ul>
     </nav>
