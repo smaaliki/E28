@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-    <!--<img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Plots"/>-->
-    <Plot></Plot>
+    <HomePage></HomePage>
   </div>
 </template>
 
 <script>
-import Plot from './components/Plot.vue'
+import HomePage from './components/HomePage.vue'
+//import store from '@/common/store'
 
 export default {
   name: 'App',
+  //store,
   components: {
-    Plot
+    HomePage
   }
 }
 </script>

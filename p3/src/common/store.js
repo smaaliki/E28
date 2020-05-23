@@ -25,6 +25,11 @@ export default new Vuex.Store({
             app.api.all('sprs').then(response => {
                 context.commit('updateSPRs', response);
             });
+        },
+        getAllSPRs ({ commit }) {
+            shop.getSPRs(sprs => {
+              commit('updateSPRs', sprs)
+            })
         }
     },
     getters: {
