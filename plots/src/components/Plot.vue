@@ -13,8 +13,11 @@
       <br/>
     </div>
     <div>
-      <p>Plot Width: {{ plotWidth }}</p>
-      <p>Plot Height: {{ plotHeight }}</p>
+      <label for='dashLength'>Dash Length:</label>
+      <input type='range' id='dashLength' min='1' max='10' step='1' v-model='settings.dashLength' @change='updateLineStyle'> 
+      <br/>
+      <label for='dashSpace'>Dash Space:</label>
+      <input type='range' id='dashSpace' min='0' max='10' step='1' v-model='settings.dashSpace' @change='updateLineStyle'> 
     </div>
     <div>
       <label for='xAxisLabel'>x Axis Label:</label>
@@ -36,12 +39,14 @@ export default {
   name: 'Plot',
   data: function() {
     return{
-      margin:  {top: 10, right: 30, bottom: 30, left: 60},
+      margin:  {top: 10, right: 30, bottom: 40, left: 60},
       settings: {
-        lineColor: "#ff0000",
+        lineColor: '#ff0000',
         lineWidth: 2,
         xAxisLabel: 'days',
         yAxisLabel: 'new cases',
+        dashLength: 3,
+        dashSpace: 3
       }
     }
   },
@@ -61,30 +66,29 @@ export default {
   },
   watch: {
     'plotData': {
-      handler: function (val) {
-      console.log('new data from watcher', val);
-      this.drawPlot();
-    }
+      handler: function () {
+        this.drawPlot();
+      }
     }
   },
   methods: {
     initializePlot: function initializePlot() {
-      this.svg = d3.select("#my_dataviz")
-      .append("svg")
-        .attr("width", this.plotWidth + this.margin.left + this.margin.right)
-        .attr("height", this.plotHeight + this.margin.top + this.margin.bottom)
-      .append("g")
-        .attr("transform",
-              "translate(" + this.margin.left + "," + this.margin.top + ")");
+      this.svg = d3.select('#my_dataviz')
+      .append('svg')
+        .attr('width', this.plotWidth + this.margin.left + this.margin.right)
+        .attr('height', this.plotHeight + this.margin.top + this.margin.bottom)
+      .append('g')
+        .attr('transform',
+              'translate(' + this.margin.left + ',' + this.margin.top + ')');
 
       // Add X axis
       var x = d3.scaleLinear()
         .domain([0, Math.max.apply(Math, this.plotData.map(function(o) { return o.x; }))])
         .range([ 0, this.plotWidth ]).nice();
 
-      this.svg.append("g")
-        .attr("class", "xaxis")
-        .attr("transform", "translate(0," + this.plotHeight + ")")
+      this.svg.append('g')
+        .attr('class', 'xaxis')
+        .attr('transform', 'translate(0,' + this.plotHeight + ')')
         .call(d3.axisBottom(x));
           
       // Add Y axis
@@ -92,39 +96,39 @@ export default {
         .domain([0, Math.max.apply(Math, this.plotData.map(function(o) { return o.y; }))])
         .range([ this.plotHeight, 0 ]).nice();
 
-      this.svg.append("g")
-        .attr("class", "yaxis")
+      this.svg.append('g')
+        .attr('class', 'yaxis')
         .call(d3.axisLeft(y));
 
       // Add X axis label:
-      this.svg.append("text")
-        .attr("class", "xaxis-label")
-        .attr("text-anchor", "end")
-        .attr("x", this.plotWidth)
-        .attr("y", this.plotHeight + this.margin.top + 20)
+      this.svg.append('text')
+        .attr('class', 'xaxis-label')
+        .attr('text-anchor', 'end')
+        .attr('x', this.plotWidth)
+        .attr('y', this.plotHeight + this.margin.top + 20)
         .text(this.settings.xAxisLabel);
 
       // Y axis label:
-      this.svg.append("text")
-        .attr("class", "yaxis-label")
-        .attr("text-anchor", "end")
-        .attr("transform", "rotate(-90)")
-        .attr("y", -this.margin.left+20)
-        .attr("x", -this.margin.top)
+      this.svg.append('text')
+        .attr('class', 'yaxis-label')
+        .attr('text-anchor', 'end')
+        .attr('transform', 'rotate(-90)')
+        .attr('y', -this.margin.left+20)
+        .attr('x', -this.margin.top)
         .text(this.settings.yAxisLabel)
 
       // Add the line
-      this.svg.append("path")
+      this.svg.append('path')
         .datum(this.plotData)
-          .attr("fill", "none")
-          .attr("stroke", this.settings.lineColor)
-          .attr("stroke-width", this.settings.lineWidth)
-          .attr("d", d3.line()
+          .attr('fill', 'none')
+          .attr('stroke', this.settings.lineColor)
+          .attr('stroke-width', this.settings.lineWidth)
+          .style('stroke-dasharray', ([this.settings.dashLength , this.settings.dashSpace]))
+          .attr('d', d3.line()
             .x(function(d) { return x(d.x) })
             .y(function(d) { return y(d.y) })
             )
-          .attr("class","chartline");
-
+          .attr('class','chartline');
     },
     'drawPlot': function drawPlot() {
       //console.log(Math.max.apply(Math, this.myData.map(function(o) { return o.x; })), Math.max.apply(Math, this.myData.map(function(o) { return o.y; })));
@@ -133,7 +137,7 @@ export default {
         .domain([0, Math.max.apply(Math, this.plotData.map(function(o) { return o.x; }))])
         .range([ 0, this.plotWidth ]).nice();
 
-      this.svg.selectAll(".xaxis")
+      this.svg.selectAll('.xaxis')
         .call(d3.axisBottom(x));
       
       // Update Y axis
@@ -141,17 +145,17 @@ export default {
         .domain([0, Math.max.apply(Math, this.plotData.map(function(o) { return o.y; }))])
         .range([ this.plotHeight, 0 ]).nice();
 
-      this.svg.selectAll(".yaxis")
+      this.svg.selectAll('.yaxis')
         .call(d3.axisLeft(y));
 
       // Update the chart line.
-      var path = this.svg.selectAll(".chartline");
+      var path = this.svg.selectAll('.chartline');
 
       path.datum(this.plotData)
-          .attr("fill", "none")
-          .attr("stroke", this.settings.lineColor)
-          .attr("stroke-width", this.settings.lineWidth)
-          .attr("d", d3.line()
+          .attr('fill', 'none')
+          .attr('stroke', this.settings.lineColor)
+          .attr('stroke-width', this.settings.lineWidth)
+          .attr('d', d3.line()
             .x(function(d) { return x(d.x) })
             .y(function(d) { return y(d.y) })
             );
@@ -160,20 +164,29 @@ export default {
     },
     updateLineColor: function updateLineColor() {
       // Update the chart line color
-      var path = this.svg.selectAll(".chartline");
+      var path = this.svg.selectAll('.chartline');
 
       path.datum(this.plotData)
-        .attr("fill", "none")
-        .attr("stroke", this.settings.lineColor);
+        .attr('fill', 'none')
+        .attr('stroke', this.settings.lineColor);
       path.exit().remove();
     },
     updateLineWidth: function updateLineWidth() {
       // Update the chart line width
-      var path = this.svg.selectAll(".chartline");
+      var path = this.svg.selectAll('.chartline');
 
       path.datum(this.plotData)
-        .attr("fill", "none")
-        .attr("stroke-width", this.settings.lineWidth)
+        .attr('fill', 'none')
+        .attr('stroke-width', this.settings.lineWidth)
+      path.exit().remove();
+    },
+    updateLineStyle: function updateLineStyle() {
+      // Update the chart line Style
+      var path = this.svg.selectAll('.chartline');
+
+      path.datum(this.plotData)
+        .attr('fill', 'none')
+        .style('stroke-dasharray', ([this.settings.dashLength , this.settings.dashSpace]))
       path.exit().remove();
     },
     updatexAxisLabel: function updatexAxisLabel() {
@@ -186,7 +199,7 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
 ul {
   list-style-type: none;
@@ -209,18 +222,15 @@ button {
   margin-top: 10px;
 }
 
-#data_div{
-  width: 50%;
-  float: left;
-}
-
-#point_div {
-  width: 50%;
-  margin-left: 25%;
-  text-align: left;
-}
 #plot_div{
   width: 50%;
   float: right;
+  text-align: left;
 }
+
+#my_dataviz {
+    margin-top: 40px;
+  background-color: rgb(241, 238, 238);
+}
+
 </style>
