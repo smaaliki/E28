@@ -15,9 +15,11 @@
     <div>
       <label for='dashLength'>Dash Length:</label>
       <input type='range' id='dashLength' min='1' max='10' step='1' v-model='settings.dashLength' @change='updateLineStyle'> 
+      {{settings.dashLength}}
       <br/>
       <label for='dashSpace'>Dash Space:</label>
-      <input type='range' id='dashSpace' min='0' max='10' step='1' v-model='settings.dashSpace' @change='updateLineStyle'> 
+      <input type='range' id='dashSpace' min='0' max='10' step='1' v-model='settings.dashSpace' @change='updateLineStyle'>
+      {{settings.dashSpace}} 
     </div>
     <div>
       <label for='xAxisLabel'>x Axis Label:</label>
@@ -25,8 +27,16 @@
       <br/>
       <label for='yAxisLabel'>y Axis Label:</label>
       <input type='text' v-model='settings.yAxisLabel' id='yAxisLabel' @change='updateyAxisLabel'/>
+      <br/>
+      <label for='axisColor'>Axis Color:</label>
+      <input type='color' v-model='settings.axisColor' id='axisColor'  @change='updateAxisColor'/>
     </div>
-    <div id='my_dataviz'></div>
+    <div>
+      <label for='backgroundcolor'>Background Color:</label>
+      <input type='color' v-model='settings.bkgColor' id='backgroundcolor' />
+      <br/>
+    </div>
+  <div id='my_dataviz' v-bind:style="{ backgroundColor: settings.bkgColor }"></div>
   </div>
   </div>
 </template>
@@ -41,12 +51,14 @@ export default {
     return{
       margin:  {top: 10, right: 30, bottom: 40, left: 60},
       settings: {
-        lineColor: '#ff0000',
+        lineColor: '#757a8a',
         lineWidth: 2,
         xAxisLabel: 'days',
         yAxisLabel: 'new cases',
-        dashLength: 3,
-        dashSpace: 3
+        axisColor: '#000000',
+        dashLength: 1,
+        dashSpace: 0,
+        bkgColor: '#f1eeee'
       }
     }
   },
@@ -88,6 +100,7 @@ export default {
 
       this.svg.append('g')
         .attr('class', 'xaxis')
+        .attr('color',this.settings.axisColor)
         .attr('transform', 'translate(0,' + this.plotHeight + ')')
         .call(d3.axisBottom(x));
           
@@ -98,11 +111,13 @@ export default {
 
       this.svg.append('g')
         .attr('class', 'yaxis')
+        .attr('color',this.settings.axisColor)
         .call(d3.axisLeft(y));
 
       // Add X axis label:
       this.svg.append('text')
         .attr('class', 'xaxis-label')
+        .attr('color',this.settings.axisColor)
         .attr('text-anchor', 'end')
         .attr('x', this.plotWidth)
         .attr('y', this.plotHeight + this.margin.top + 20)
@@ -111,6 +126,7 @@ export default {
       // Y axis label:
       this.svg.append('text')
         .attr('class', 'yaxis-label')
+        .attr('color',this.settings.axisColor)
         .attr('text-anchor', 'end')
         .attr('transform', 'rotate(-90)')
         .attr('y', -this.margin.left+20)
@@ -194,6 +210,12 @@ export default {
     },
     updateyAxisLabel: function updateyAxisLabel() {
       this.svg.select('.yaxis-label').text(this.settings.yAxisLabel);
+    },
+    updateAxisColor: function updateAxisColor() {
+      this.svg.select('.xaxis').attr('color', this.settings.axisColor);
+      this.svg.select('.yaxis').attr('color', this.settings.axisColor);
+      this.svg.select('.xaxis-label').attr('fill', this.settings.axisColor);
+      this.svg.select('.yaxis-label').attr('fill', this.settings.axisColor);
     }
   }
 }
@@ -229,8 +251,7 @@ button {
 }
 
 #my_dataviz {
-    margin-top: 40px;
-  background-color: rgb(241, 238, 238);
+  margin-top: 40px;
 }
 
 </style>
