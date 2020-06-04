@@ -107,8 +107,17 @@ export default {
                 { x: 62, y: 781},
                 { x: 63, y: 822},
                 { x: 64, y: 779},
+                { x: 65, y: 883},
+                { x: 66, y: 563},
+                { x: 67, y: 638},
+                { x: 68, y: 726},
+                { x: 69, y: 661},
+                { x: 70, y: 635},
+                { x: 71, y: 596},
+                { x: 72, y: 571},
+                { x: 73, y: 650}
                 ],
-      tempPoint: {x:60, y: 754},
+      tempPoint: {x:74, y: 754},
     }
   },
   mounted : function() {
@@ -142,7 +151,7 @@ button {
 
 table {
     font-family: 'Open Sans', sans-serif;
-    width: 50%;
+    width: 40%;
     border-collapse: collapse;
     border: 3px solid #44475C;
     margin-left:auto;
@@ -181,12 +190,12 @@ table tbody tr:nth-child(2n) td {
 }
 
 #data_div{
-  width: 50%;
+  width: 40%;
   float: left;
 }
 
 #point_div {
-  width: 50%;
+  width: 40%;
   margin-left: 25%;
   text-align: left;
 }

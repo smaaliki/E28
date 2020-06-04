@@ -1,43 +1,59 @@
 <template>
   <div>
-   
-  <div id='plot_div'>
+    <div id='plot_div'>
       <h2>Plot Settings</h2>
-    <div>
-      <label for='linecolor'>Line Color:</label>
-      <input type='color' v-model='settings.lineColor' id='linecolor' @change='updateLineColor'/>
-      <br/>
-      
-      <label for='linewidth'>Line Width:</label>
-      <input type='text' v-model='settings.lineWidth' id='linewidth' @change='updateLineWidth'/>
-      <br/>
+      <div id="tabs" class="container">
+        <!--https://vuejsexamples.com/tabbed-content-with-vue-js/-->
+        <div class="tabs">
+            <a v-on:click="activetab=1" v-bind:class="[ activetab === 1 ? 'active' : '' ]">Line</a>
+            <a v-on:click="activetab=2" v-bind:class="[ activetab === 2 ? 'active' : '' ]">Axis</a>
+            <a v-on:click="activetab=3" v-bind:class="[ activetab === 3 ? 'active' : '' ]">Chart</a>
+        </div>
+
+        <div class="content">
+          <div v-if="activetab === 1" class="tabcontent">
+            <div>
+              <label for='linecolor'>Line Color:</label>
+              <input type='color' v-model='settings.lineColor' id='linecolor' @change='updateLineColor'/>
+              <br/>
+              
+              <label for='linewidth'>Line Width:</label>
+              <input type='text' v-model='settings.lineWidth' id='linewidth' @change='updateLineWidth'/>
+              <br/>
+            </div>
+            <div>
+              <label for='dashLength'>Dash Length:</label>
+              <input type='range' id='dashLength' min='1' max='10' step='1' v-model='settings.dashLength' @change='updateLineStyle'> 
+              {{settings.dashLength}}
+              <br/>
+              <label for='dashSpace'>Dash Space:</label>
+              <input type='range' id='dashSpace' min='0' max='10' step='1' v-model='settings.dashSpace' @change='updateLineStyle'>
+              {{settings.dashSpace}} 
+            </div>
+          </div>
+          <div v-if="activetab === 2" class="tabcontent">
+            <div>
+              <label for='xAxisLabel'>x Axis Label:</label>
+              <input type='text' v-model='settings.xAxisLabel' id='xAxisLabel' @change='updatexAxisLabel'/>
+              <br/>
+              <label for='yAxisLabel'>y Axis Label:</label>
+              <input type='text' v-model='settings.yAxisLabel' id='yAxisLabel' @change='updateyAxisLabel'/>
+              <br/>
+              <label for='axisColor'>Axis Color:</label>
+              <input type='color' v-model='settings.axisColor' id='axisColor'  @change='updateAxisColor'/>
+            </div>
+          </div>
+          <div v-if="activetab === 3" class="tabcontent">
+            <div>
+              <label for='backgroundcolor'>Background Color:</label>
+              <input type='color' v-model='settings.bkgColor' id='backgroundcolor' />
+              <br/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='my_dataviz' v-bind:style="{ backgroundColor: settings.bkgColor }"></div>
     </div>
-    <div>
-      <label for='dashLength'>Dash Length:</label>
-      <input type='range' id='dashLength' min='1' max='10' step='1' v-model='settings.dashLength' @change='updateLineStyle'> 
-      {{settings.dashLength}}
-      <br/>
-      <label for='dashSpace'>Dash Space:</label>
-      <input type='range' id='dashSpace' min='0' max='10' step='1' v-model='settings.dashSpace' @change='updateLineStyle'>
-      {{settings.dashSpace}} 
-    </div>
-    <div>
-      <label for='xAxisLabel'>x Axis Label:</label>
-      <input type='text' v-model='settings.xAxisLabel' id='xAxisLabel' @change='updatexAxisLabel'/>
-      <br/>
-      <label for='yAxisLabel'>y Axis Label:</label>
-      <input type='text' v-model='settings.yAxisLabel' id='yAxisLabel' @change='updateyAxisLabel'/>
-      <br/>
-      <label for='axisColor'>Axis Color:</label>
-      <input type='color' v-model='settings.axisColor' id='axisColor'  @change='updateAxisColor'/>
-    </div>
-    <div>
-      <label for='backgroundcolor'>Background Color:</label>
-      <input type='color' v-model='settings.bkgColor' id='backgroundcolor' />
-      <br/>
-    </div>
-  <div id='my_dataviz' v-bind:style="{ backgroundColor: settings.bkgColor }"></div>
-  </div>
   </div>
 </template>
 
@@ -49,6 +65,7 @@ export default {
   name: 'Plot',
   data: function() {
     return{
+      activetab: 1,
       margin:  {top: 10, right: 30, bottom: 40, left: 60},
       settings: {
         lineColor: '#757a8a',
@@ -240,18 +257,84 @@ label {
 input {
   margin-top: 10px;
 }
+
 button {
   margin-top: 10px;
 }
 
 #plot_div{
-  width: 50%;
+  width: 60%;
   float: right;
   text-align: left;
 }
 
 #my_dataviz {
   margin-top: 40px;
+}
+
+/*Tabs*/
+/** {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}*/
+
+.container {  
+    max-width: 620px; 
+    min-width: 420px;
+    margin: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+    color: #888;
+}
+
+/* Style the tabs */
+.tabs {
+  overflow: hidden;
+  margin-left: 20px;
+  margin-bottom: -2px; /* hide bottom border*/
+}
+
+.tabs ul {
+    list-style-type: none;
+    margin-left: 20px;
+}
+
+.tabs a{
+    float: left;
+    cursor: pointer;
+    padding: 12px 24px;
+    transition: background-color 0.2s;
+    border: 1px solid #ccc;
+    border-right: none;
+    background-color: #f1f1f1;
+    border-radius: 10px 10px 0 0;
+    font-weight: bold;
+}
+.tabs a:last-child { 
+    border-right: 1px solid #ccc;
+}
+
+/* Change background color of tabs on hover */
+.tabs a:hover {
+    background-color: #aaa;
+    color: #fff;
+}
+
+/* Styling for active tab */
+.tabs a.active {
+    background-color: #fff;
+    color: #484848;
+    border-bottom: 2px solid #fff;
+    cursor: default;
+}
+
+/* Style the tab content */
+.tabcontent {
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  box-shadow: 3px 3px 6px #e1e1e1
 }
 
 </style>
